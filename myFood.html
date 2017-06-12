@@ -1,0 +1,129 @@
+<html>
+<style>
+body{
+	font-size:5em;	
+	font-family:Arial;
+	font-style:italic;
+}
+.title {
+	margin:0.4em 0;
+	text-align: center;
+	font-size:1.5em;
+}
+#foodNum {
+	width: 50%;
+	height: 1.5em;
+	font-size:0.8em;
+}
+#foodNum option {
+	font-size:0.4em;
+}
+button {
+	font-size:0.8em;
+	margin: 10px;
+}
+#food{ 
+	margin:0.7em 0em;
+	height: 3em;
+}
+.className{
+  line-height: 1em;
+  height: 1.5em;
+  width: 20%;
+  color:#ffffff;
+  background-color:#4a8cf7;
+  font-weight:normal;
+  font-family:Arial;
+  border:0px solid #dcdcdc;
+  -webkit-border-top-left-radius:3px;
+  -moz-border-radius-topleft:3px;
+  border-top-left-radius:3px;
+  -webkit-border-top-right-radius:3px;
+  -moz-border-radius-topright:3px;
+  border-top-right-radius:3px;
+  -webkit-border-bottom-left-radius:3px;
+  -moz-border-radius-bottomleft:3px;
+  border-bottom-left-radius:3px;
+  -webkit-border-bottom-right-radius:3px;
+  -moz-border-radius-bottomright:3px;
+  border-bottom-right-radius:3px;
+  -moz-box-shadow: inset 0px 0px 0px 0px #ffffff;
+  -webkit-box-shadow: inset 0px 0px 0px 0px #ffffff;
+  box-shadow: inset 0px 0px 0px 0px #ffffff;
+  text-align:center;
+  display:inline-block;
+  text-decoration:none;
+}
+.className:hover{
+  background-color:#4a8cf7;
+}
+</style>
+<body>
+<div>
+	<div class="title">吃饭啦</div>
+	<div>
+		<label>选几道菜：<label/>
+		<select id="foodNum">
+			<option value="1">1道菜</option>
+			<option value="2">2道菜</option>
+			<option value="3">3道菜</option>
+			<option value="4">4道菜</option>
+		</select>
+	</div>
+	<div id="food"></div>
+	<div>
+		<button class="className" onclick="selectFood()">选菜</button>
+		<button class="className" onclick="selectSoup()">选汤</button>
+		<button class="className" onclick="selectNoodles()">单点</button>
+		<button class="className" onclick="quickSelect()">速食</button>
+	</div>
+</div>
+</body>
+<script>
+//选菜
+function selectFood() {
+	var foodArr = ["肉末茄子","蒜蓉青菜","酸辣土豆丝","西葫芦","香菇肉片","杏鲍菇炒肉","青椒鸡蛋","胡萝卜鸡蛋","菠菜鸡蛋","手撕包菜","凉拌黄瓜","肉沫豆角","芹菜炒肉","西红柿炒鸡蛋","清蒸鲈鱼","可乐鸡翅","蒜苔炒肉","蒜苔炒鸡蛋","地三鲜","炒粉","蚂蚁上树","红烧排骨"];
+	var foodNum = document.getElementById("foodNum").value;
+	var foodResArr = new Array();
+	if(foodNum == "") {
+		foodNum = 1;
+	}
+	for(var i = 0; i < foodNum; i++) {
+		var foodRadom = foodArr[Math.floor(Math.random() * foodArr.length)];
+		foodResArr.push(foodRadom);
+		foodResArrLen = foodResArr.length;
+		foodResArr = foodResArr.unique();
+		if(foodResArrLen > foodResArr.length) {
+			i -= 1;
+		}
+	}
+	document.getElementById("food").innerHTML = foodResArr;
+}
+//选汤
+function selectSoup() {
+	var soupArr = ["鲫鱼豆腐汤","紫菜蛋花汤","西红柿鸡蛋汤","疙瘩汤","山药排骨汤","玉米排骨汤","莲藕排骨汤"];
+	document.getElementById("food").innerHTML = soupArr[Math.floor(Math.random() * soupArr.length)];
+}
+//单点
+function selectNoodles() {
+	var noodlesArr = ["炸酱面","豆角焖面","西红柿鸡蛋面","肉沫茄子面","飘香拌面","土豆面片","炒面片","蛋炒饭","鸡肉焖饭","土豆豆角焖饭"];
+	document.getElementById("food").innerHTML = noodlesArr[Math.floor(Math.random() * noodlesArr.length)];
+}
+//速食
+function quickSelect() {
+	var quickFoodArr = ["混沌", "水饺"];
+	document.getElementById("food").innerHTML = quickFoodArr[Math.floor(Math.random() * quickFoodArr.length)];
+}
+Array.prototype.unique = function(){
+ var res = [];
+ var json = {};
+ for(var i = 0; i < this.length; i++){
+  if(!json[this[i]]){
+   res.push(this[i]);
+   json[this[i]] = 1;
+  }
+ }
+ return res;
+}
+</script>
+</html>
